@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'fr.mine'
+version = 'beta.0.0.1'
+libsDirName = 'G:/ServeursDeDev/plugins'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+    maven { url 'https://jitpack.io' }
+    maven { url = 'https://maven.enginehub.org/repo/' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.20.4-R0.1-SNAPSHOT'
+    implementation 'fr.mrmicky:FastInv:3.0.4'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+}
+
+shadowJar {
+    relocate 'fr.mrmicky.fastinv', 'fr.mine.fastinv'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileJava.getOptions().setEncoding("UTF-8")
